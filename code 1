@@ -1,0 +1,6 @@
+git init
+git add .
+git commit -m "Initial commit - neural net chess project"
+git remote add origin https://github.com/snogawd/chess-maia-beater-bot-thingy.git
+git branch -M main
+git push -u origin main
