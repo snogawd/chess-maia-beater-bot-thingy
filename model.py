@@ -7,7 +7,7 @@ class ResBlock(nn.Module):
 class ChessNet(nn.Module):
  def __init__(self):
   super().__init__()
-  self.net=nn.Sequential(nn.Linear(773,512),nn.ReLU(),*[ResBlock(512) for _ in range(4)],nn.Linear(512,4672))
-  self.net[2]=torch.compile(self.net[2],mode="reduce-overhead")
-  self.net[3]=torch.compile(self.net[3],mode="reduce-overhead")
+  self.net=nn.Sequential(nn.Linear(1152,512),nn.ReLU(),*[ResBlock(512) for _ in range(4)],nn.Linear(512,4672))
+  for i,m in enumerate(self.net):
+   if isinstance(m,ResBlock):self.net[i]=torch.compile(m,mode="reduce-overhead")
  def forward(self,x):return self.net(x)

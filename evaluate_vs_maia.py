@@ -11,7 +11,7 @@ while not b.is_game_over():
  if b.turn:
   x=encode_board(b).unsqueeze(0).to(d)
   with torch.no_grad():
-   with torch.autocast(device_type="cuda" if cuda_avail else "cpu",dtype=torch.bfloat16 if cuda_avail else torch.float32):mv_idx=m(x).argmax().item()
+   with torch.amp.autocast("cuda" if cuda_avail else "cpu",dtype=torch.bfloat16 if cuda_avail else torch.float32):mv_idx=m(x).argmax().item()
   lm=list(b.legal_moves);mv=lm[mv_idx%len(lm)];b.push(mv);print(f"Our: {mv}")
  else:
   mai.sendline(f"position fen {b.fen()}");mai.sendline("go movetime 200");mai.expect("bestmove (.*)");mv=mai.match.group(1).decode();b.push_uci(mv);print(f"Maia: {mv}")

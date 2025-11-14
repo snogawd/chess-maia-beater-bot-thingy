@@ -13,7 +13,8 @@ Train a neural network without search to defeat Maia 1100 ELO.
 - **TF32 precision** auto-enabled on Ampere+ GPUs (compute capability ≥7.5) for ~3-5x speedup
 - **bfloat16 mixed precision** via `GradScaler` for memory efficiency and faster convergence
 - **AdamW optimizer** with gradient clipping (norm=1.0) for stable training - also fused for speed
-- **Multiprocessing DataLoader** with pin_memory for faster GPU transfer
+- **Real PGN data** loaded directly from elite games via `iter_pgn_positions()` in utils
+- **Deleted dataset.py** - was just random dummy data; replaced with actual Lichess elite games
 
 ### Evaluation
 
